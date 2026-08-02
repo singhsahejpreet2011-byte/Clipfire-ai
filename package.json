@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@distube/ytdl-core": "^4.16.12",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "fluent-ffmpeg": "^2.1.3",
+    "openai": "^7.3.0",
+    "yt-dlp-exec": "^1.0.2"
+  }
+}

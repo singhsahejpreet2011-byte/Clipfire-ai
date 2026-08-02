@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLIPFIRE AI — AI Short Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="cyber-orb orb-1"></div>
+  <div class="cyber-orb orb-2"></div>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header class="futuristic-header">
+      <div class="logo">
+        <i class="fa-solid fa-sparkles pulse-icon"></i>
+        <span>CLIP<span class="highlight">FIRE</span>.AI</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <a href="#pricing" class="nav-link"><i class="fa-solid fa-crown"></i> Pricing</a>
+        <div class="system-status">
+          <span class="status-dot"></span> Credits: <strong id="creditsDisplay" style="color: #818cf8; margin-left: 4px;">4/4</strong>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Clip Extraction Engine</div>
+        <h1 class="gradient-text">Turn Videos Into Viral Clips</h1>
+        <p class="subtitle">Extract 1080p high-retention short clips automatically using intelligent moment detection.</p>
+        
+        <a href="#studio" class="scroll-down-btn">
+          <span>Open Studio</span>
+          <i class="fa-solid fa-arrow-down"></i>
+        </a>
+      </section>
+
+      <!-- Glass Input Card -->
+      <div id="studio" class="glass-card glow-border">
+        <div class="card-header">
+          <i class="fa-solid fa-link"></i>
+          <span>YouTube Video Link</span>
+        </div>
+        
+        <div class="textarea-wrapper">
+          <input type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off">
+        </div>
+        
+        <button id="generateBtn" class="robotic-btn" onclick="processVideo()">
+          <span id="btnText">Extract 5 Viral Clips ⚡</span>
+        </button>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading" class="loading-box hidden">
+        <div class="radar-spinner"></div>
+        <p class="pulse-text">Analyzing video segments for key moments...</p>
+      </div>
+
+      <!-- Results Grid -->
+      <div id="results" class="results-grid" style="margin-bottom: 60px;"></div>
+
+      <!-- Visible Pricing Section -->
+      <section id="pricing" class="pricing-section">
+        <div class="hero-badge"><i class="fa-solid fa-tag"></i> FLEXIBLE PLANS</div>
+        <h2 class="gradient-text" style="font-size: 2.2rem; margin-bottom: 10px;">Simple Subscription Pricing</h2>
+        <p class="subtitle" style="margin-bottom: 30px;">Upgrade anytime for unlimited 1080p clip processing and priority rendering.</p>
+
+        <div class="pricing-grid">
+          <!-- Monthly Plan -->
+          <div class="pricing-card glow-border">
+            <span class="plan-title">Monthly Plan</span>
+            <div class="price">₹120 <span>/month</span></div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Unlimited Clip Extractions</li>
+              <li><i class="fa-solid fa-check"></i> Fast 1080p HD Exports</li>
+              <li><i class="fa-solid fa-check"></i> AI Viral Score Detector</li>
+            </ul>
+            <button class="robotic-btn" onclick="openUpiModal('monthly')">Pay ₹120 via Direct UPI</button>
+          </div>
+
+          <!-- Yearly Plan -->
+          <div class="pricing-card featured glow-border">
+            <div class="popular-badge">BEST VALUE</div>
+            <span class="plan-title">Yearly Plan</span>
+            <div class="price">₹999 <span>/year</span></div>
+            <p style="font-size: 0.8rem; color: #10b981; margin-bottom: 12px;">Save over 30% annually</p>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Everything in Monthly</li>
+              <li><i class="fa-solid fa-check"></i> Priority Server Stream Copy</li>
+              <li><i class="fa-solid fa-check"></i> 1 Full Year Unlimited Access</li>
+            </ul>
+            <button class="robotic-btn download-btn" onclick="openUpiModal('yearly')">Pay ₹999 via Direct UPI</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Direct UPI Payment Modal -->
+  <div id="paywallModal" class="modal-overlay hidden">
+    <div class="glass-card modal-card">
+      <button class="modal-close" onclick="closePaywall()">&times;</button>
+      
+      <div class="hero-badge" style="margin-bottom: 8px;"><i class="fa-solid fa-qrcode"></i> SCAN & PAY VIA UPI</div>
+      <h2 style="font-size: 1.6rem; margin-bottom: 6px;" id="modalPlanTitle">Scan QR to Pay ₹120</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px;">Pay using Google Pay, PhonePe, Paytm, or BHIM App</p>
+
+      <!-- Custom QR Image -->
+      <div style="background: #ffffff; padding: 12px; border-radius: 16px; display: inline-block; margin-bottom: 16px; border: 2px solid var(--accent-primary);">
+        <img src="qr.jpg" alt="UPI QR Code" style="width: 200px; height: 200px; display: block; border-radius: 8px; object-fit: contain;">
+      </div>
+
+      <!-- Copy UPI ID Row -->
+      <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--glass-border); padding: 10px 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <span style="color: var(--text-muted); font-size: 0.9rem;">UPI ID: <strong id="upiIdText" style="color: #fff;">9891484047@upi</strong></span>
+        <button onclick="copyUpiId()" style="background: var(--accent-primary); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600;"><i class="fa-regular fa-copy"></i> Copy</button>
+      </div>
+
+      <!-- Transaction Reference Box -->
+      <div style="text-align: left; margin-bottom: 16px;">
+        <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Enter 12-Digit UPI Ref / UTR / Txn ID:</label>
+        <input type="text" id="utrInput" placeholder="e.g. 423156789012" style="width: 100%; padding: 12px; border-radius: 10px; background: rgba(3, 7, 18, 0.9); color: #fff; border: 1px solid var(--glass-border); outline: none;">
+      </div>
+
+      <button class="robotic-btn download-btn" onclick="verifyAndActivate()">Submit Payment Proof ⚡</button>
+    </div>
+  </div>
+
+  <script>
+    const MY_UPI_ID = "9891484047@upi"; 
+    const MAX_FREE_TRIALS = 4;
+
+    function getRemainingCredits() {
+      const savedCredits = localStorage.getItem('clipfire_credits');
+      const isSubscribed = localStorage.getItem('clipfire_subscribed');
+
+      if (isSubscribed === 'true') {
+        return 'UNLIMITED 👑';
+      }
+      if (savedCredits === null) {
+        localStorage.setItem('clipfire_credits', MAX_FREE_TRIALS);
+        return MAX_FREE_TRIALS;
+      }
+      return parseInt(savedCredits, 10);
+    }
+
+    function updateCreditDisplay() {
+      const credits = getRemainingCredits();
+      const display = document.getElementById('creditsDisplay');
+      if (typeof credits === 'number') {
+        display.innerText = `${credits}/${MAX_FREE_TRIALS}`;
+      } else {
+        display.innerText = credits;
+      }
+    }
+
+    updateCreditDisplay();
+
+    function openUpiModal(plan) {
+      const amount = plan === 'monthly' ? 120 : 999;
+      const planName = plan === 'monthly' ? 'Monthly Plan' : 'Yearly Plan';
+
+      document.getElementById('modalPlanTitle').innerText = `Scan QR to Pay ₹${amount} (${planName})`;
+      document.getElementById('paywallModal').classList.remove('hidden');
+    }
+
+    function closePaywall() {
+      document.getElementById('paywallModal').classList.add('hidden');
+    }
+
+    function copyUpiId() {
+      navigator.clipboard.writeText(MY_UPI_ID);
+      alert("UPI ID (9891484047@upi) copied to clipboard!");
+    }
+
+    function verifyAndActivate() {
+      const utr = document.getElementById('utrInput').value.trim();
+      if (!utr || utr.length < 6) {
+        alert("Please enter a valid Transaction / UTR Ref Number from your UPI App.");
+        return;
+      }
+
+      alert("Payment proof received! Activating Unlimited Pro Access.");
+      localStorage.setItem('clipfire_subscribed', 'true');
+      closePaywall();
+      updateCreditDisplay();
+    }
+
+    function extractVideoId(url) {
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      return match ? match[1] : null;
+    }
+
+    async function processVideo() {
+      let credits = getRemainingCredits();
+
+      if (typeof credits === 'number' && credits <= 0) {
+        openUpiModal('monthly');
+        return;
+      }
+
+      const url = document.getElementById('youtubeUrl').value.trim();
+      const resultsDiv = document.getElementById('results');
+      const loadingDiv = document.getElementById('loading');
+      const btnText = document.getElementById('btnText');
+
+      const videoId = extractVideoId(url);
+
+      if (!videoId) {
+        alert("Please enter a valid YouTube URL.");
+        return;
+      }
+
+      loadingDiv.classList.remove('hidden');
+      resultsDiv.innerHTML = '';
+      btnText.innerText = "Analyzing Video... ⚡";
+
+      try {
+        const response = await fetch('/api/fast-clips', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ videoUrl: url })
+        });
+
+        const data = await response.json();
+        loadingDiv.classList.add('hidden');
+        btnText.innerText = "Extract 5 Viral Clips ⚡";
+
+        if (data.clips && data.clips.length > 0) {
+          if (typeof credits === 'number') {
+            credits -= 1;
+            localStorage.setItem('clipfire_credits', credits);
+            updateCreditDisplay();
+          }
+
+          data.clips.forEach((clip, index) => {
+            const clipTitle = clip.hookTitle || `Viral Segment ${index + 1}`;
+            
+            const card = document.createElement('div');
+            card.className = 'glass-card clip-card glow-border';
+            card.innerHTML = `
+              <div class="card-top">
+                <span class="viral-badge"><i class="fa-solid fa-fire"></i> Score: ${clip.viralScore || 95}/100</span>
+                <span class="time-badge"><i class="fa-regular fa-clock"></i> ${clip.startTime} - ${clip.endTime}</span>
+              </div>
+              <h3 class="clip-title">${clipTitle}</h3>
+              <p class="clip-reason">${clip.reason || "High retention moment detected."}</p>
+              
+              <div class="iframe-container">
+                <iframe src="https://www.youtube.com/embed/${videoId}?start=${clip.startSec}&end=${clip.endSec}&autoplay=0" 
+                        allowfullscreen>
+                </iframe>
+              </div>
+
+              <button class="robotic-btn download-btn" id="dlBtn_${index}" onclick="downloadClipDirect('${url}', ${clip.startSec}, ${clip.endSec}, ${index})">
+                <span id="dlText_${index}">Download 1080p Clip ⚡</span>
+              </button>
+            `;
+            resultsDiv.appendChild(card);
+          });
+        }
+      } catch (err) {
+        loadingDiv.classList.add('hidden');
+        btnText.innerText = "Extract 5 Viral Clips ⚡";
+        alert("Failed to process video.");
+      }
+    }
+
+    async function downloadClipDirect(videoUrl, startSec, endSec, index) {
+      const btnText = document.getElementById(`dlText_${index}`);
+      btnText.innerText = "Preparing 1080p Stream... ⏳";
+
+      try {
+        const response = await fetch('/api/download-direct', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ videoUrl, startSec, endSec })
+        });
+
+        const data = await response.json();
+
+        if (data.fileUrl) {
+          btnText.innerText = "Download Started!";
+          const link = document.createElement('a');
+          link.href = data.fileUrl;
+          link.setAttribute('download', `clip_1080p_${index + 1}.mp4`);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          setTimeout(() => {
+            btnText.innerHTML = `Download 1080p Clip ⚡`;
+          }, 3000);
+        } else {
+          alert("Could not render clip download.");
+          btnText.innerHTML = `Download 1080p Clip ⚡`;
+        }
+      } catch (err) {
+        alert("Server communication error.");
+        btnText.innerHTML = `Download 1080p Clip ⚡`;
+      }
+    }
+  </script>
+</body>
+</html>
